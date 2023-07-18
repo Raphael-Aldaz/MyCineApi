@@ -33,6 +33,12 @@ public class UserController {
             return ResponseEntity.badRequest().body("Erreur" + e.getMessage() );
         }
     }
+
+    @DeleteMapping("/user/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable("id") Long id){
+        AppUser user = accountService.findUserById(id);
+        return  accountService.deleteUser(user);
+    }
     @GetMapping("/users")
     public ResponseEntity<List<AppUser>>listUser(){
        return accountService.listUser();

@@ -12,4 +12,7 @@ public interface AccountService {
     public void addRoleToUser(String username, String rolename);
     public AppUser findUserByUsername(String username);
     ResponseEntity<List<AppUser>> listUser();
+    public ResponseEntity<String>  deleteUser(AppUser user);
+
+    public AppUser findUserById(Long id);
 }

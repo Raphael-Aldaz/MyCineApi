@@ -6,6 +6,7 @@ import fr.fms.entities.AppRole;
 import fr.fms.entities.AppUser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -49,5 +50,20 @@ public class AccountServiceImpl implements AccountService{
     @Override
     public ResponseEntity<List<AppUser>> listUser() {
         return ResponseEntity.ok().body(userRepository.findAll());
+    }
+
+    @Override
+    public ResponseEntity<String> deleteUser(AppUser user) {
+        try{
+            userRepository.delete(user);
+            return ResponseEntity.ok().body("User deleted");
+        } catch (Exception e){
+            return  ResponseEntity.ok().body("User not deleted");
+        }
+
+    }
+    @Override
+    public AppUser findUserById(Long id) {
+        return userRepository.findById(id).get();
     }
 }
